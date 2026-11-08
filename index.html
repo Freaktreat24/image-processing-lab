@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f5f1">
+  <title>Image Processing Lab</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="masthead">
+      <div class="eyebrow"><span class="status-dot"></span> DIGITAL IMAGE PROCESSING · LAB 01</div>
+      <h1>Image Processing <span>Lab</span></h1>
+      <p class="subtitle">Instagram-Style Filter Simulator</p>
+      <p class="intro">Explore how simple pixel transformations shape the mood of an image. Everything runs locally in your browser.</p>
+    </header>
+
+    <section class="upload-row" aria-label="Upload an image">
+      <label class="upload-button" for="image-file"><span aria-hidden="true">＋</span> Upload Image</label>
+      <input id="image-file" type="file" accept="image/png,image/jpeg,.jpg,.jpeg,.png">
+      <span id="file-status" class="file-status">JPG or PNG · processed on this device</span>
+      <p id="error-message" class="error" role="alert" hidden></p>
+    </section>
+
+    <section id="workspace" class="workspace" aria-label="Image comparison" hidden>
+      <div class="preview-grid">
+        <article class="preview-card">
+          <div class="preview-heading"><div><span class="number">01</span><h2>Original</h2></div><span class="preview-tag">SOURCE</span></div>
+          <div class="image-stage"><canvas id="original-canvas" aria-label="Original image"></canvas><div class="empty-state">Your image will appear here</div></div>
+          <div class="image-meta" id="original-meta">No image loaded</div>
+        </article>
+        <article class="preview-card output-card">
+          <div class="preview-heading"><div><span class="number">02</span><h2>Filtered output</h2></div><span class="preview-tag active-tag">LIVE PREVIEW</span></div>
+          <div class="image-stage"><canvas id="output-canvas" aria-label="Filtered image"></canvas><div class="empty-state">Choose an image to begin</div></div>
+          <div class="image-meta" id="output-meta">Paris · 100% intensity</div>
+        </article>
+      </div>
+
+      <section class="controls panel">
+        <div class="section-heading"><div><span class="eyebrow">01 / TRANSFORM</span><h2>Choose a filter</h2></div><span class="filter-count">10 FILTERS</span></div>
+        <div id="filter-list" class="filter-list" role="group" aria-label="Image filters"></div>
+        <p class="disclaimer">These filters are educational recreations inspired by common Instagram-style color effects. They are not Instagram's proprietary filter implementations.</p>
+        <div class="intensity-block">
+          <div class="intensity-label"><label for="intensity">Filter intensity</label><output id="intensity-value" for="intensity">100%</output></div>
+          <input id="intensity" type="range" min="0" max="100" value="100" aria-label="Filter intensity">
+          <div class="range-labels"><span>0% · Original</span><span>100% · Full effect</span></div>
+        </div>
+        <div class="action-row"><button id="reset-button" class="button secondary" type="button">↺ <span>Reset</span></button><button id="download-button" class="button primary" type="button" disabled>↓ <span>Download filtered image</span></button></div>
+        <p id="canvas-note" class="canvas-note">Upload an image to enable filter controls.</p>
+      </section>
+    </section>
+
+    <section id="theory" class="theory panel" aria-live="polite">
+      <div class="theory-title"><div><span class="eyebrow">02 / UNDER THE PIXELS</span><h2 id="theory-name">How filters work</h2></div><span class="theory-index">A / 10</span></div>
+      <p id="theory-overview" class="overview">Select a filter to explore its color transformations. Each effect applies simple, explainable operations to every pixel in the image.</p>
+      <div class="theory-grid">
+        <div class="theory-cell"><h3>Processing pipeline</h3><ol id="theory-steps" class="steps"><li>Load source pixels</li><li>Apply color operations</li><li>Blend with original</li></ol></div>
+        <div class="theory-cell"><h3>Formula used</h3><pre id="theory-formula" class="formula">C' = S(C × contrast + brightness + offset)</pre><p id="formula-vars" class="formula-vars">C = original RGB vector · S = saturation transform · clamp values to 0–255</p></div>
+        <div class="theory-cell why-cell"><h3>Why it works</h3><p id="theory-why">A filter changes pixel channel values in a consistent way, shifting the overall color and tone while preserving image structure.</p></div>
+      </div>
+    </section>
+
+    <footer><span>IMAGE PROCESSING LAB <span class="footer-separator">/</span> CLIENT-SIDE PIXEL PROCESSING</span><span>NO UPLOADS · NO TRACKING</span></footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
